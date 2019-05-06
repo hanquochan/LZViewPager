@@ -46,9 +46,9 @@ class LZConstants {
 public class LZViewPager : UIView {
     @IBOutlet public var delegate: LZViewPagerDelegate?
     @IBOutlet public var dataSource: LZViewPagerDataSource?
-    public var hostController: UIViewController?
+    @objc public var hostController: UIViewController?
     //If empty datasource then the currentIndex will return nil
-    public var currentIndex: Int? {
+    @objc public var currentIndex: Int? {
         return self.contentView.currentIndex
     }
     
@@ -91,7 +91,7 @@ public class LZViewPager : UIView {
         return content
     }()
     
-    public func reload() {
+    @objc public func reload() {
         if let _ = headerView.superview {
             headerView.removeFromSuperview()
         }
@@ -123,7 +123,7 @@ public class LZViewPager : UIView {
         self.contentView.reload()
     }
     
-    public func select(index: Int, animated: Bool = true) {
+    @objc public func select(index: Int, animated: Bool = true) {
         guard let itemsCount = self.dataSource?.numberOfItems(), index < itemsCount else {
             assertionFailure("Index out of range")
             return
