@@ -17,7 +17,7 @@ import SnapKit
 
 class LZConstants {
     static let defaultIndicatorColor = UIColor(red: 255.0/255.0, green: 36.0/255.0, blue: 79.0/255.0, alpha: 1.0)
-    static let defaultHeaderBackgroundColor = UIColor.white
+    static let defaultHeaderBackgroundColor = UIColor.clear
     static let defaultHeaderHight: CGFloat = 40.0
     static let defaultIndicatorHight: CGFloat = 2.0
 }
@@ -47,8 +47,9 @@ public class LZViewPager : UIView {
     @IBOutlet public var delegate: LZViewPagerDelegate?
     @IBOutlet public var dataSource: LZViewPagerDataSource?
     @objc public var hostController: UIViewController?
+    @objc public var headerScrollHeader: LZViewPagerHeader!
     //If empty datasource then the currentIndex will return nil
-    @objc public var currentIndex: Int? {
+    public var currentIndex: Int? {
         return self.contentView.currentIndex
     }
     
@@ -67,7 +68,7 @@ public class LZViewPager : UIView {
         return 0
     }
     
-    private lazy var headerView: LZViewPagerHeader = {
+    @objc public lazy var headerView: LZViewPagerHeader = {
         let header = LZViewPagerHeader()
         header.showsVerticalScrollIndicator = false
         header.showsHorizontalScrollIndicator = false
@@ -79,6 +80,7 @@ public class LZViewPager : UIView {
             self?.contentView.scroll(to: newIndex, animated: animated)
         }
         header.backgroundColor = self.dataSource?.backgroundColorForHeader?() ?? LZConstants.defaultHeaderBackgroundColor
+        self.headerScrollHeader = header;
         return header
     }()
     
