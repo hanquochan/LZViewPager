@@ -53,6 +53,10 @@ public class LZViewPager : UIView {
         return self.contentView.currentIndex
     }
     
+    @objc public var getSelectedIndex: NSInteger {
+        return self.contentView.currentIndex!
+    }
+    
     private var defaultPageIndex: Int? {
         guard let itemsCount = self.dataSource?.numberOfItems() else {
             return nil
